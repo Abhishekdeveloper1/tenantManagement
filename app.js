@@ -6,11 +6,13 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+console.log('abhi'+usersRouter);
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'templates/auth'));
+
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
