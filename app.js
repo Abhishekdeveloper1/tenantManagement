@@ -2,18 +2,15 @@ const dbConnect = require('./config/database');
 dbConnect();
 var createError = require('http-errors');
 var express = require('express');
-const hbs = require('hbs')
-
-
-
+const hbs = require('hbs');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-console.log('abhi'+usersRouter);
 var app = express();
+// console.log('abhi'+app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +27,8 @@ hbs.registerPartials(path.join(__dirname, 'views/templates/partials/'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+const { createUser } = require('./controllers/auth/AuthController');
+createUser('JohnDoe', 'john@example.com', 'securepassword');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
