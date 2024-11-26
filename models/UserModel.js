@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// dbConnect();
-
 const userSchema=({
     username: {
         type: String,
@@ -16,6 +14,10 @@ const userSchema=({
       password:{
         type:String,
         required:true,
+      },
+      roles: {
+        type: [String],
+        default: ['user'],
       },
       createdAt:
       {

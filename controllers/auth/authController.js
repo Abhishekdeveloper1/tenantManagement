@@ -2,10 +2,10 @@ const User = require('../../models/UserModel');
 const bcrypt = require('bcrypt');
 
   const createUser = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password,roles } = req.body;
   
     try {
-      if (!username || !email || !password) {
+      if (!username || !email || !password || !roles) {
         return res.status(400).json({ error: 'All fields are required' });
       }
         const existingUser = await User.findOne({ email });
@@ -18,6 +18,7 @@ const bcrypt = require('bcrypt');
         username,
         email,
         password: hashedPassword, // Save hashed password
+        roles,
       });
   
       // Save the user to the database

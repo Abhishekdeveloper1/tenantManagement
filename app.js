@@ -10,6 +10,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const dashboardRouter = require('./routes/dashboard');
+
 
 var app = express();
 // console.log('abhi'+app);
@@ -30,6 +32,7 @@ hbs.registerPartials(path.join(__dirname, 'views/templates/partials/'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/',authRouter);
+app.use('/',dashboardRouter);
 
 
 // app.use('/createUser',require("./routes/auth")); // Use authlogin route properly
