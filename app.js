@@ -6,21 +6,18 @@ const hbs = require('hbs');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const sessionMiddleware = require("./middleware/sessionMiddleware");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
 
-
 var app = express();
-// console.log('abhi'+app);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-// app.set('views', path.join(__dirname, 'templates/auth'));
 
 app.set('view engine', 'hbs');
+app.use(sessionMiddleware);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -33,9 +30,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/',authRouter);
 app.use('/',dashboardRouter);
-
-
-// app.use('/createUser',require("./routes/auth")); // Use authlogin route properly
 
 
 // catch 404 and forward to error handler

@@ -23,9 +23,16 @@ const bcrypt = require('bcrypt');
   
       // Save the user to the database
       await user.save();
+      req.session.user={
+        id:user._id,
+        username:user.username,
+        email:user.email,
+      }
   
       console.log('User created successfully:', user);
-      return res.status(201).json({ message: 'User created successfully', user });
+      return res.redirect('/dashboard');
+
+      // return res.status(201).json({ message: 'User created successfully', user });
   
     } catch (error) {
       console.error('Error creating user:', error.message);
