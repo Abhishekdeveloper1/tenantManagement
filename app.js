@@ -9,6 +9,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+
 var app = express();
 // console.log('abhi'+app);
 
@@ -27,8 +29,11 @@ hbs.registerPartials(path.join(__dirname, 'views/templates/partials/'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-const { createUser } = require('./controllers/auth/AuthController');
-createUser('JohnDoe', 'john@example.com', 'securepassword');
+app.use('/',authRouter);
+
+
+// app.use('/createUser',require("./routes/auth")); // Use authlogin route properly
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
