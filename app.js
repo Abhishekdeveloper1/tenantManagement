@@ -18,6 +18,10 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.set('view engine', 'hbs');
 app.use(sessionMiddleware);
+app.use((req, res, next) => {
+  console.log('Current session:', req.session);
+  next();
+});
 
 app.use(logger('dev'));
 app.use(express.json());
