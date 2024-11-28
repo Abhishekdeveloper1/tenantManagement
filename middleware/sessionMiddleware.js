@@ -7,6 +7,15 @@ const sessionMiddleware = session({
   saveUninitialized: false,
   cookie: { maxAge: 60000 * 60 * 24 },
 });
+const checkSession=(req,res,next)=>{
+  if(req.session && req.session.user)
+  {
+    next();
+  }
+  else
+  {
+    res.redirect('/');
+  }
+}
 
-
-module.exports=sessionMiddleware;
+module.exports={sessionMiddleware,checkSession,};
