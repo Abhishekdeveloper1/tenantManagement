@@ -100,25 +100,19 @@ catch (error) {
     const { email, password } = req.body;
   
     try {
-      // Validate input fields
       if (!email || !password) {
         return res.status(400).json({ error: 'Email and password are required' });
       }
-  
-      // Find user by email
       const user = await User.findOne({ email });
+      console.log(user);
       if (!user) {
         return res.status(401).json({ error: 'Invalid email or password' });
       }
-  
-      // Compare passwords
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
         return res.status(401).json({ error: 'Invalid email or password' });
       }
-  
-      // Store user info in the session
-      req.session.user = {
+        req.session.user = {
         id: user._id,
         username: user.username,
         email: user.email,
