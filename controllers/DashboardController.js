@@ -3,12 +3,16 @@ const dashboard=(req,res)=>{
     res.render('templates/users/dashboard', { title: 'dashboard',user: req.session.user });
 }
 
-const packagelist=(req,res)=>{
-    res.render('templates/users/subpackage');
+const packagelist=async(req,res)=>{
+    const planLists=await SubscriptionplansModel.find({});
+
+    res.render('templates/users/subpackage',{planLists});
 }
 
-const subscriptionplan=(req,res)=>{
-    res.render('templates/users/subscriptionplan');
+const subscriptionplan=async(req,res)=>{
+    const planLists=await SubscriptionplansModel.find({});
+
+    res.render('templates/users/subscriptionplan',{planLists});
 }
 
 const addSubscriptionPlan=async(req,res)=>{
@@ -38,4 +42,9 @@ const planLists=await SubscriptionplansModel.find({});
 console.log(planLists);
     res.render('templates/users/subscriptionplanlist',{planLists});
 }
+
+
+
+
+  
 module.exports={dashboard,packagelist,subscriptionplan,addSubscriptionPlan,subscriptionplanlist,}

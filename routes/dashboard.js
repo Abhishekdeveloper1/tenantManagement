@@ -12,4 +12,5 @@ router.get('/subscription-list',subscriptionplanlist);
 
 
 
+
 module.exports=router;

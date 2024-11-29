@@ -28,7 +28,7 @@ footer {
 <section class="is-hero-bar">
   <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
     <h1 class="title">
-      Dashboard {{user.username}}
+    Select subscription
     </h1>
     <button class="button light">Button</button>
   </div>
@@ -36,16 +36,22 @@ footer {
 
   <section class="section main-section">
     <div class="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
+        {{#each planLists}}
+  <a href="/subscription/{{this._id}}" class="card-link">
+
       <div class="card">
         <div class="card-content">
           <div class="flex items-center justify-between">
             <div class="widget-label">
               <h3>
-                Basic
+                {{this.planName}}
               </h3>
               <h1>
-                ₹0/month
+                ₹{{this.price}}/{{this.duration}}
               </h1>
+              <h4>
+                {{this.features}}
+              </h4>
             </div>
             {{!-- <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span> --}}
             <span class="icon widget-icon text-blue-500">
@@ -56,41 +62,9 @@ footer {
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-content">
-          <div class="flex items-center justify-between">
-            <div class="widget-label">
-              <h3>
-                Starter
-              </h3>
-              <h1>
-                ₹625/month
-              </h1>
-            </div>
-  <span class="icon widget-icon text-blue-500">
-  <i class="mdi mdi-calendar mdi-36px"></i>
-  <i class="mdi mdi-cash mdi-36px"></i>
-</span>          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-content">
-          <div class="flex items-center justify-between">
-            <div class="widget-label">
-              <h3>
-                Business
-              </h3>
-              <h1>
-                ₹1,345/month
-              </h1>
-            </div>
-  <span class="icon widget-icon text-blue-500">
-  <i class="mdi mdi-calendar mdi-36px"></i>
-  <i class="mdi mdi-cash mdi-36px"></i>
-</span>          </div>
-        </div>
-      </div>
+      </a>
+{{/each}}
+      
     </div>
 
 
