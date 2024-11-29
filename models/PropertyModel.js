@@ -86,10 +86,26 @@ const propertySchema = mongoose.Schema(
       type: Number,
       required: true, // Price for renting the property
     },
+    description: {
+        type: String,
+        required: false, // Optional description field
+        trim: true,
+        maxLength: 1000, // You can define a maximum length for the description
+      },
     isAvailable: {
       type: Boolean,
       default: true,
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+      },
+      subscriptionId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'SubscriptionPlan',
+        required: true,
+      },
     createdAt: {
       type: Date,
       default: Date.now,
