@@ -29,7 +29,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 hbs.registerPartials(path.join(__dirname, 'views/templates/partials/'));
-
+hbs.registerHelper('incrementCounter', function(index) {
+  return index + 1;
+});
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/',authRouter);

@@ -1,0 +1,125 @@
+{{>headeradmin}}
+
+<div id="app"></div>
+
+{{>navbar}}
+
+<style>
+footer {
+  padding: 200px;
+}
+</style>
+
+<section class="is-title-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <ul>
+      <li>Admin</li>
+      <li>Dashboard</li>
+    </ul>
+    <a href="https://justboil.me/" onclick="alert('Coming soon'); return false" target="_blank" class="button blue">
+      <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
+      <span>Premium Demo</span>
+    </a>
+  </div>
+</section>
+
+<section class="is-hero-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <h1 class="title">
+      Dashboard {{user.username}}
+    </h1>
+    <button class="button light">Button</button>
+  </div>
+</section>
+
+<div class="card-content">
+  <form method="POST" action="/add-subscription-plan"> <!-- POST request to the backend -->
+    
+    <!-- Plan Name Field -->
+    <div class="field">
+      <label class="label" for="planName">Plan Name</label>
+      <div class="field-body">
+        <div class="field">
+          <div class="control icons-left">
+            <input class="input" type="text" placeholder="Enter plan name" id="planName" name="planName" required>
+            <span class="icon left"><i class="mdi mdi-account"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Price Field -->
+    <div class="field">
+      <label class="label" for="price">Price</label>
+      <div class="field-body">
+        <div class="field">
+          <div class="control icons-left">
+            <input class="input" type="number" placeholder="Enter plan price" id="price" name="price" required>
+            <span class="icon left"><i class="mdi mdi-currency-usd"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duration Field (e.g. Monthly, Yearly) -->
+    <div class="field">
+      <label class="label" for="duration">Duration</label>
+      <div class="control">
+        <div class="select">
+          <select id="duration" name="duration" required>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Field -->
+    <div class="field">
+      <label class="label" for="features">Features</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="Enter features (comma separated)" id="features" name="features">
+      </div>
+    </div>
+
+    <hr>
+
+    {{!-- <!-- Subject Field -->
+    <div class="field">
+      <label class="label" for="subject">Subject</label>
+      <div class="control">
+        <input class="input" type="text" placeholder="e.g. Partnership opportunity" id="subject" name="subject" required>
+      </div>
+      <p class="help">This field is required</p>
+    </div>
+
+    <!-- Question Field -->
+    <div class="field">
+      <label class="label" for="question">Question</label>
+      <div class="control">
+        <textarea class="textarea" placeholder="Explain how we can help you" id="question" name="question"></textarea>
+      </div>
+    </div> --}}
+
+    <hr>
+
+    <!-- Submit and Reset buttons -->
+    <div class="field grouped">
+      <div class="control">
+        <button type="submit" class="button green">
+          Submit
+        </button>
+      </div>
+      <div class="control">
+        <button type="reset" class="button red">
+          Reset
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<section class="section main-section"></section>
+
+{{>adminfooter}}
