@@ -75,6 +75,7 @@ footer {
   <th>Contact Number</th>
   <th>Email Address</th>
   <th>Is Property Available?</th>
+  <th>Images</th>
   <th>Action</th>
 </tr>
 </thead>
@@ -107,6 +108,11 @@ footer {
          <td>{{this.contactDetails.phone}}</td>
                   <td>{{this.contactDetails.email}}</td>
                                     <td>{{this.isAvailable}}</td>
+                                   <td>
+      {{#each this.images}}
+        <img src="/{{this}}" alt="Property Image" style="width: 50px; height: 50px; object-fit: cover; margin-right: 5px;">
+      {{/each}}
+    </td>
 
 
 
