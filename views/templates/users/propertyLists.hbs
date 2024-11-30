@@ -1,0 +1,152 @@
+{{>headeradmin}}
+
+<div id="app"></div>
+
+{{>navbar}}
+
+<style>
+    .container {
+  {{!-- max-width: 100px; --}}
+  overflow: scroll;
+}
+footer {
+  padding: 200px;
+}
+</style>
+
+<section class="is-title-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <ul>
+      <li>Admin</li>
+      <li>Dashboard</li>
+    </ul>
+    <a href="https://justboil.me/" onclick="alert('Coming soon'); return false" target="_blank" class="button blue">
+      <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
+      <span>Premium Demo</span>
+    </a>
+  </div>
+</section>
+
+
+<section class="section main-section"></section>
+    <div class="notification blue">
+      <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
+        <div>
+          <span class="icon"><i class="mdi mdi-buffer"></i></span>
+          <b>Subscription List</b>
+        </div>
+        {{!-- <button type="button" class="button small textual --jb-notification-dismiss">Dismiss</button> --}}
+          <a href="/subscriptionplan" class="button small textual --jb-notification-dismiss">Add Subscription</a>
+
+      </div>
+    </div>
+    <div class="card has-table container">
+      <header class="card-header">
+        <p class="card-header-title">
+          <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+          Clients
+        </p>
+        <a href="#" class="card-header-icon">
+          <span class="icon"><i class="mdi mdi-reload"></i></span>
+        </a>
+      </header>
+      <div class="card-content">
+        <table>
+          <thead>
+          <tr>
+  {{!-- <th class="checkbox-cell">
+    <label class="checkbox">
+      <input type="checkbox">
+      <span class="check"></span>
+    </label>
+  </th> --}}
+  <th>S.no.</th>
+  <th>Name of the House Owner</th>
+  <th>Property Name</th>
+  <th>Property Address</th>
+  <th>Property Type</th>
+  <th>House Type</th>
+  <th>Building/Apartment Name</th>
+  <th>Number of Bedrooms</th>
+  <th>Number of Toilets</th>
+  <th>Property Size (in sq.ft)</th>
+  <th>Rent Price (₹)</th>
+  <th>Description</th>
+  <th>Contact Number</th>
+  <th>Email Address</th>
+  <th>Is Property Available?</th>
+  <th>Action</th>
+</tr>
+</thead>
+<tbody>
+  {{#each propertylists}}
+  <tr>
+    {{!-- <td>
+      <label class="checkbox">
+        <input type="checkbox">
+        <span class="check"></span>
+      </label>
+    </td> --}}
+        <td>{{incrementCounter @index}}</td>  <!-- Use the helper here -->
+
+    <td>{{this.ownerName}}</td>
+    <td>{{this.propertyName}}</td>
+<td>
+  {{this.address.street}}, {{this.address.city}}, {{this.address.state}}, 
+  {{this.address.zipCode}}, {{this.address.country}}
+</td>
+    <td>{{this.propertyType}}</td>
+        <td>{{this.houseType}}</td>
+
+    <td>{{this.buildingOrApartmentName}}</td>
+    <td>{{this.bedrooms}}</td>
+     <td>{{this.toilets}}</td>
+      <td>{{this.propertySize}}</td>
+       <td>{{this.rentPrice}}</td>
+        <td>{{this.description}}</td>
+         <td>{{this.contactDetails.phone}}</td>
+                  <td>{{this.contactDetails.email}}</td>
+                                    <td>{{this.isAvailable}}</td>
+
+
+
+    <td class="actions-cell">
+      <div class="buttons right nowrap">
+        <button class="button small green --jb-modal" data-target="sample-modal-2" type="button">
+          <span class="icon"><i class="mdi mdi-eye"></i></span>
+        </button>
+        <button class="button small red --jb-modal" data-target="sample-modal" type="button">
+          <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+        </button>
+      </div>
+    </td>
+  </tr>
+  {{/each}}
+           
+        
+        
+         
+          </tbody>
+        </table>
+        {{!-- <div class="table-pagination">
+          <div class="flex items-center justify-between">
+            <div class="buttons">
+              <button type="button" class="button active">1</button>
+              <button type="button" class="button">2</button>
+              <button type="button" class="button">3</button>
+            </div>
+            <small>Page 1 of 3</small>
+          </div>
+        </div> --}}
+      </div>
+    </div>
+
+  
+  
+
+  
+  </section>
+
+<section class="section main-section"></section>
+
+{{>adminfooter}}

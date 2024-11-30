@@ -18,78 +18,6 @@ const propertyDetails = (req, res) => {
   };
 
  
-  // const savepropertyDetails = async (req, res) => {
-  //   try {
-  //     const {
-  //       ownerName,
-  //       propertyName,
-  //       street,
-  //       city,
-  //       state,
-  //       zipCode,
-  //       propertyType,
-  //       houseType,
-  //       bedrooms,
-  //       toilets,
-  //       propertySize,
-  //       rentPrice,
-  //       description,
-  //       contactDetails
-  //     } = req.body;
-  
-  //     // Handle image uploads (multiple images)
-  //     const images = req.files ? req.files.map(file => file.path) : [];  // Array of image paths
-  //     const userId = req.user ? req.user._id : new mongoose.Types.ObjectId();  // Correct usage with 'new'
-  //     const subscriptionId = req.body.subscriptionId ? req.body.subscriptionId : new mongoose.Types.ObjectId();  // Correct usage with 'new'
-  
-  //     // const userId = req.user ? req.user._id : mongoose.Types.ObjectId();  // Use the logged-in user's ID or generate a new ObjectId
-  //     // const subscriptionId = req.body.subscriptionId ? req.body.subscriptionId : mongoose.Types.ObjectId();  // If subscriptionId is provided, use it; else, generate a new ObjectId
-  
-  //     // // Assuming `userId` and `subscriptionId` are provided by the logged-in user or passed in the request
-  //     // const userId = req.user ? req.user._id : null;  // Example, adjust as per your authentication method
-  //     // const subscriptionId = req.body.subscriptionId || null;
-  
-  //     if (!userId) {
-  //       return res.status(400).send({ success: false, message: "User ID is required." });
-  //     }
-  
-  //     // Create a new property object
-  //     const newProperty = new PropertyModel({
-  //       ownerName,
-  //       propertyName,
-  //       address: {
-  //         street,
-  //         city,
-  //         state,
-  //         zipCode
-  //       },
-  //       propertyType,
-  //       houseType,
-  //       bedrooms,
-  //       toilets,
-  //       propertySize,
-  //       rentPrice,
-  //       description,
-  //       contactDetails,
-  //       images,  // Array of image paths
-  //       userId,
-  //       subscriptionId
-  //     });
-  
-  //     // Save the property details to the database
-  //     await newProperty.save();
-  
-  //     // Respond with success message
-  //     res.status(200).send({ success: true, message: 'Property details saved successfully.' });
-  //   } catch (error) {
-  //     console.error("Database save error:", error);
-  //     res.status(500).send({
-  //       success: false,
-  //       message: "An error occurred while saving property details.",
-  //       error: error.message
-  //     });
-  //   }
-  // };
   const savepropertyDetails = async (req, res) => {
     try {
       const {
@@ -99,27 +27,25 @@ const propertyDetails = (req, res) => {
         city,
         state,
         zipCode,
-        country, // Country field is included
+        country,
         propertyType,
         houseType,
-        buildingOrApartmentName, // Added this field from the form
+        buildingOrApartmentName,
         bedrooms,
         toilets,
         propertySize,
         rentPrice,
         description,
         contactDetails,
-        isAvailable // Checkbox field for availability
+        isAvailable
       } = req.body;
   
       // Handle image uploads (multiple images)
       const images = req.files ? req.files.map(file => file.path) : []; // Array of image paths
   
-      // Generate or fetch `userId` and `subscriptionId`
       const userId = req.user ? req.user._id : new mongoose.Types.ObjectId(); // Use authenticated user ID or generate a new ObjectId
       const subscriptionId = req.body.subscriptionId || new mongoose.Types.ObjectId();
   
-      // Validate required fields (optional but recommended)
       if (!ownerName || !propertyName || !street || !city || !state || !zipCode || !propertyType || !bedrooms || !toilets || !rentPrice) {
         return res.status(400).send({ 
           success: false, 
@@ -136,7 +62,7 @@ const propertyDetails = (req, res) => {
           city,
           state,
           zipCode,
-          country // Add country to the address
+          country
         },
         propertyType,
         houseType,
@@ -171,5 +97,10 @@ const propertyDetails = (req, res) => {
     }
   };
   
+const propertyLists=async(req,res)=>{
+  const propertylists=await PropertyModel.find({});
+console.log(propertylists);
+  res.render('templates/users/propertyLists', {propertylists});
 
- module.exports={propertyDetails,savepropertyDetails,}
+}
+ module.exports={propertyDetails,savepropertyDetails,propertyLists,}
