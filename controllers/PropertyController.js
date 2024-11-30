@@ -85,7 +85,7 @@ const propertyDetails = (req, res) => {
       // Save the property details to the database
       await newProperty.save();
   
-      res.redirect('/property-details');
+      res.redirect('/propertyLists');
       
     } catch (error) {
       console.error("Database save error:", error);
