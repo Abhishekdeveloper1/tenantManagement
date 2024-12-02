@@ -41,8 +41,11 @@ const propertyDetails = (req, res) => {
       } = req.body;
   
       // Handle image uploads (multiple images)
-      const images = req.files ? req.files.map(file => file.path) : []; // Array of image paths
-  
+   const images = req.files 
+  ? req.files.map(file => file.path.replace('public/', '')) 
+  : [];
+
+ 
       const userId = req.user ? req.user._id : new mongoose.Types.ObjectId(); // Use authenticated user ID or generate a new ObjectId
       const subscriptionId = req.body.subscriptionId || new mongoose.Types.ObjectId();
   
