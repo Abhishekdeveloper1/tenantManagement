@@ -1,0 +1,205 @@
+{{>headeradmin}}
+
+<div id="app"></div>
+
+{{>navbar}}
+
+
+<section class="is-title-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <ul>
+      <li>Admin</li>
+      <li>Dashboard</li>
+    </ul>
+    <a href="https://justboil.me/" onclick="alert('Coming soon'); return false" target="_blank" class="button blue">
+      <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
+      <span>Premium Demo</span>
+    </a>
+  </div>
+</section>
+
+<section class="is-hero-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <h1 class="title">
+    Select subscription
+    </h1>
+    <button class="button light">Button</button>
+  </div>
+</section>
+<section class="section main-section">
+  <div class="card mb-6">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-ballot"></i></span>
+        Property Details Form
+      </p>
+    </header>
+    <div class="card-content">
+      <form method="post" action="/save-property-details" enctype="multipart/form-data">
+        <!-- House Owner's Name -->
+        <div class="field">
+          <label class="label">Name of the House Owner</label>
+          <div class="control">
+            <input class="input" type="text" name="ownerName" placeholder="Enter owner name" required>
+          </div>
+        </div>
+
+        <!-- Property Name -->
+        <div class="field">
+          <label class="label">Property Name</label>
+          <div class="control">
+            <input class="input" type="text" name="propertyName" placeholder="Enter property name" required>
+          </div>
+        </div>
+
+        <!-- Property Address -->
+        <div class="field">
+          <label class="label">Property Address</label>
+          <div class="control">
+            <input class="input" type="text" name="street" placeholder="Street address" required>
+          </div>
+          <div class="control">
+            <input class="input" type="text" name="city" placeholder="City" required>
+          </div>
+          <div class="control">
+            <input class="input" type="text" name="state" placeholder="State" required>
+          </div>
+          <div class="control">
+            <input class="input" type="text" name="zipCode" placeholder="Zip code" required>
+          </div>
+          <div class="control">
+            <input class="input" type="text" name="country" placeholder="Country" value="India" readonly>
+          </div>
+        </div>
+
+        <!-- Property Type -->
+        <div class="field">
+          <label class="label">Property Type</label>
+          <div class="control">
+            <div class="select">
+              <select name="propertyType" required>
+                <option value="">Select Property Type</option>
+                <option>Apartment</option>
+                <option>Villa</option>
+                <option>Duplex</option>
+                <option>Studio</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- House Type -->
+        <div class="field">
+          <label class="label">House Type</label>
+          <div class="control">
+            <div class="select">
+              <select name="houseType" required>
+                <option value="">Select House Type</option>
+                <option>Apartment</option>
+                <option>Building</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Building or Apartment Name -->
+        <div class="field">
+          <label class="label">Building/Apartment Name</label>
+          <div class="control">
+            <input class="input" type="text" name="buildingOrApartmentName" placeholder="E.g., Skyline Towers">
+          </div>
+        </div>
+
+        <!-- Number of Bedrooms and Toilets -->
+        <div class="field">
+          <label class="label">Number of Bedrooms</label>
+          <div class="control">
+            <input class="input" type="number" name="bedrooms" placeholder="Enter number of bedrooms" required min="1">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Number of Toilets</label>
+          <div class="control">
+            <input class="input" type="number" name="toilets" placeholder="Enter number of toilets" required min="1">
+          </div>
+        </div>
+
+        <!-- Property Size -->
+        <div class="field">
+          <label class="label">Property Size (in sq.ft)</label>
+          <div class="control">
+            <input class="input" type="number" name="propertySize" placeholder="Enter property size" required>
+          </div>
+        </div>
+
+        <!-- Rent Price -->
+        <div class="field">
+          <label class="label">Rent Price (₹)</label>
+          <div class="control">
+            <input class="input" type="number" name="rentPrice" placeholder="Enter rent price" required>
+          </div>
+        </div>
+
+        <!-- Property Description -->
+        <div class="field">
+          <label class="label">Description</label>
+          <div class="control">
+            <textarea class="textarea" name="description" placeholder="Enter property description"></textarea>
+          </div>
+        </div>
+
+        <!-- Property Images -->
+        <div class="field">
+          <label class="label">Upload Images</label>
+          <div class="control">
+            <input class="input" type="file" name="images" accept="image/*" multiple>
+          </div>
+        </div>
+
+        <!-- Contact Details -->
+        <div class="field">
+          <label class="label">Contact Number</label>
+          <div class="control">
+            <input class="input" type="tel" name="contactDetails[phone]" placeholder="Enter contact number" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Email Address</label>
+          <div class="control">
+            <input class="input" type="email" name="contactDetails[email]" placeholder="Enter email address">
+          </div>
+        </div>
+
+        <!-- Availability -->
+        <div class="field">
+          <label class="label">Is Property Available?</label>
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" name="isAvailable" value="true" checked>
+              Available
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit and Reset Buttons -->
+        <hr>
+        <div class="field grouped">
+          <div class="control">
+            <button type="submit" class="button green">
+              Submit
+            </button>
+          </div>
+          <div class="control">
+            <button type="reset" class="button red">
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+{{>adminfooter}}

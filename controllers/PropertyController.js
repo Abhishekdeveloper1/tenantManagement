@@ -106,4 +106,12 @@ console.log(propertylists);
   res.render('templates/users/propertyLists', {propertylists});
 
 }
- module.exports={propertyDetails,savepropertyDetails,propertyLists,}
+const editPropertyDetails=(req,res)=>{
+  // const propertylists=await PropertyModel.find({});
+
+  console.log(req.params.id);  // Correctly access the 'id' from the request params
+  // return;
+  res.render('templates/users/editpropertyLists');
+
+}
+ module.exports={propertyDetails,savepropertyDetails,propertyLists,editPropertyDetails}
