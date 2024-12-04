@@ -33,6 +33,9 @@ hbs.registerPartials(path.join(__dirname, 'views/templates/partials/'));
 hbs.registerHelper('incrementCounter', function(index) {
   return index + 1;
 });
+hbs.registerHelper('eq', (a, b) => {
+  return a === b;
+});
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/',authRouter);

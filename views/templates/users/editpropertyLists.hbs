@@ -21,7 +21,7 @@
 <section class="is-hero-bar">
   <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
     <h1 class="title">
-    Select subscription
+    Edit property details
     </h1>
     <button class="button light">Button</button>
   </div>
@@ -35,12 +35,14 @@
       </p>
     </header>
     <div class="card-content">
-      <form method="post" action="/save-property-details" enctype="multipart/form-data">
+      <form method="post" action="/updatePropertyDetails" enctype="multipart/form-data">
         <!-- House Owner's Name -->
+         <input type="hidden" name="pid" value="{{pid}}">
         <div class="field">
           <label class="label">Name of the House Owner</label>
           <div class="control">
-            <input class="input" type="text" name="ownerName" placeholder="Enter owner name" required>
+            <input class="input" type="text" name="ownerName" value="{{propertylists.ownerName}}" placeholder="Enter owner name" required>
+
           </div>
         </div>
 
@@ -48,7 +50,7 @@
         <div class="field">
           <label class="label">Property Name</label>
           <div class="control">
-            <input class="input" type="text" name="propertyName" placeholder="Enter property name" required>
+            <input class="input" type="text" name="propertyName" value="{{propertylists.propertyName}}" placeholder="Enter property name" required>
           </div>
         </div>
 
@@ -56,19 +58,19 @@
         <div class="field">
           <label class="label">Property Address</label>
           <div class="control">
-            <input class="input" type="text" name="street" placeholder="Street address" required>
+            <input class="input" type="text" name="street" value="{{propertylists.address.street}}" placeholder="Street address" required>
           </div>
           <div class="control">
-            <input class="input" type="text" name="city" placeholder="City" required>
+            <input class="input" type="text" name="city" value="{{propertylists.address.city}}" placeholder="City" required>
           </div>
           <div class="control">
-            <input class="input" type="text" name="state" placeholder="State" required>
+            <input class="input" type="text" name="state" value="{{propertylists.address.state}}" placeholder="State" required>
           </div>
           <div class="control">
-            <input class="input" type="text" name="zipCode" placeholder="Zip code" required>
+            <input class="input" type="text" name="zipCode" value="{{propertylists.address.zipCode}}" placeholder="Zip code" required>
           </div>
           <div class="control">
-            <input class="input" type="text" name="country" placeholder="Country" value="India" readonly>
+            <input class="input" type="text" name="country" value="{{propertylists.address.country}}" placeholder="Country" value="India" readonly>
           </div>
         </div>
 
@@ -79,11 +81,11 @@
             <div class="select">
               <select name="propertyType" required>
                 <option value="">Select Property Type</option>
-                <option>Apartment</option>
-                <option>Villa</option>
-                <option>Duplex</option>
-                <option>Studio</option>
-                <option>Other</option>
+               <option value="Apartment" {{#if (eq propertylists.propertyType "Apartment")}}selected{{/if}}>Apartment</option>
+              <option value="Villa" {{#if (eq propertylists.propertyType "Villa")}}selected{{/if}}>Villa</option>
+              <option value="Duplex" {{#if (eq propertylists.propertyType "Duplex")}}selected{{/if}}>Duplex</option>
+              <option value="Studio" {{#if (eq propertylists.propertyType "Studio")}}selected{{/if}}>Studio</option>
+              <option value="Other" {{#if (eq propertylists.propertyType "Other")}}selected{{/if}}>Other</option>
               </select>
             </div>
           </div>
@@ -96,8 +98,8 @@
             <div class="select">
               <select name="houseType" required>
                 <option value="">Select House Type</option>
-                <option>Apartment</option>
-                <option>Building</option>
+                <option value="Apartment" {{#if (eq propertylists.houseType "Apartment")}}selected{{/if}}>Apartment</option>
+                <option value="Building" {{#if (eq propertylists.houseType "Building")}}selected{{/if}}>Building</option>
               </select>
             </div>
           </div>
@@ -107,7 +109,7 @@
         <div class="field">
           <label class="label">Building/Apartment Name</label>
           <div class="control">
-            <input class="input" type="text" name="buildingOrApartmentName" placeholder="E.g., Skyline Towers">
+            <input class="input" type="text" name="buildingOrApartmentName" value="{{propertylists.buildingOrApartmentName}}" placeholder="E.g., Skyline Towers">
           </div>
         </div>
 
@@ -115,13 +117,13 @@
         <div class="field">
           <label class="label">Number of Bedrooms</label>
           <div class="control">
-            <input class="input" type="number" name="bedrooms" placeholder="Enter number of bedrooms" required min="1">
+            <input class="input" type="number" name="bedrooms" value="{{propertylists.bedrooms}}" placeholder="Enter number of bedrooms" required min="1">
           </div>
         </div>
         <div class="field">
           <label class="label">Number of Toilets</label>
           <div class="control">
-            <input class="input" type="number" name="toilets" placeholder="Enter number of toilets" required min="1">
+            <input class="input" type="number" name="toilets" value="{{propertylists.toilets}}" placeholder="Enter number of toilets" required min="1">
           </div>
         </div>
 
@@ -129,7 +131,7 @@
         <div class="field">
           <label class="label">Property Size (in sq.ft)</label>
           <div class="control">
-            <input class="input" type="number" name="propertySize" placeholder="Enter property size" required>
+            <input class="input" type="number" name="propertySize" value="{{propertylists.propertySize}}" placeholder="Enter property size" required>
           </div>
         </div>
 
@@ -137,7 +139,7 @@
         <div class="field">
           <label class="label">Rent Price (₹)</label>
           <div class="control">
-            <input class="input" type="number" name="rentPrice" placeholder="Enter rent price" required>
+            <input class="input" type="number" name="rentPrice" value="{{propertylists.rentPrice}}" placeholder="Enter rent price" required>
           </div>
         </div>
 
@@ -145,7 +147,7 @@
         <div class="field">
           <label class="label">Description</label>
           <div class="control">
-            <textarea class="textarea" name="description" placeholder="Enter property description"></textarea>
+            <textarea class="textarea" name="description"  placeholder="Enter property description">{{propertylists.description}}</textarea>
           </div>
         </div>
 
@@ -161,18 +163,18 @@
         <div class="field">
           <label class="label">Contact Number</label>
           <div class="control">
-            <input class="input" type="tel" name="contactDetails[phone]" placeholder="Enter contact number" required>
+            <input class="input" type="tel" name="contactDetails[phone]" value="{{propertylists.contactDetails.phone}}" placeholder="Enter contact number" required>
           </div>
         </div>
         <div class="field">
           <label class="label">Email Address</label>
           <div class="control">
-            <input class="input" type="email" name="contactDetails[email]" placeholder="Enter email address">
+            <input class="input" type="email" name="contactDetails[email]" value="{{propertylists.contactDetails.email}}" placeholder="Enter email address">
           </div>
         </div>
 
         <!-- Availability -->
-        <div class="field">
+        {{!-- <div class="field">
           <label class="label">Is Property Available?</label>
           <div class="control">
             <label class="checkbox">
@@ -180,7 +182,21 @@
               Available
             </label>
           </div>
-        </div>
+        </div> --}}
+        <div class="field">
+  <label class="label">Is Property Available?</label>
+  <div class="control">
+    <div class="select">
+      <select name="isAvailable" required>
+        <option value="true" {{#if (eq propertylists.isAvailable "true")}}selected{{/if}}>Available</option>
+        <option value="false" {{#if (eq propertylists.isAvailable "false")}}selected{{/if}}>Not Available</option>
+
+
+      </select>
+    </div>
+  </div>
+</div>
+
 
         <!-- Submit and Reset Buttons -->
         <hr>

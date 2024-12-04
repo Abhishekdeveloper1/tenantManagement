@@ -2,6 +2,7 @@ const PropertyModel =require("../models/PropertyModel");
 const mongoose=require('mongoose');
 
 const { uplodMiddleware } =require("../middleware/fileuploadMiddleware");
+const { json } = require("express");
 const propertyDetails = (req, res) => {
     try {
       if (Object.keys(req.body).length > 0) {
@@ -106,12 +107,68 @@ console.log(propertylists);
   res.render('templates/users/propertyLists', {propertylists});
 
 }
-const editPropertyDetails=(req,res)=>{
-  // const propertylists=await PropertyModel.find({});
+const editPropertyDetails=async(req,res)=>{
+  const propertylists=await PropertyModel.findById(req.params.id);
 
-  console.log(req.params.id);  // Correctly access the 'id' from the request params
+  console.log(propertylists);  // Correctly access the 'id' from the request params
   // return;
-  res.render('templates/users/editpropertyLists');
+  res.render('templates/users/editpropertyLists',{propertylists,pid:req.params.id});
 
 }
- module.exports={propertyDetails,savepropertyDetails,propertyLists,editPropertyDetails}
+
+
+const updatePropertyDetails = async (req, res) => {
+  try {
+    const { pid, ...updateData } = req.body; // Extract `pid` and other fields from the request body
+    console.log("PID received:", pid);
+
+    // Handle nested fields explicitly
+    if (updateData.street || updateData.city || updateData.state) {
+      updateData.address = {
+        street: updateData.street || "",
+        city: updateData.city || "",
+        state: updateData.state || "",
+        zipCode: updateData.zipCode || "",
+        country: updateData.country || "India",
+      };
+      delete updateData.street;
+      delete updateData.city;
+      delete updateData.state;
+      delete updateData.zipCode;
+      delete updateData.country;
+    }
+
+    if (req.files && req.files.length > 0) {
+      // Replace existing images if new ones are uploaded
+      const imagePaths = req.files.map((file) =>
+        file.path.replace("public/", "")
+      );
+      updateData.images = imagePaths;
+    }
+
+    // Convert isAvailable to boolean
+    if (updateData.isAvailable) {
+      updateData.isAvailable = updateData.isAvailable === "true";
+    }
+
+    // Perform the update
+    const updatedProperty = await PropertyModel.findByIdAndUpdate(
+      pid, // Use ObjectId directly
+      { $set: updateData },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedProperty) {
+      return res.status(404).send("Property not found");
+    }
+
+    console.log("Updated Property:", updatedProperty);
+    res.redirect("/propertyLists");
+  } catch (error) {
+    console.error("Error updating property:", error);
+    res.status(500).send("An error occurred while updating the property");
+  }
+};
+
+
+ module.exports={propertyDetails,savepropertyDetails,propertyLists,editPropertyDetails,updatePropertyDetails,}
