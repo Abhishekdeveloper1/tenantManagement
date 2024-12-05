@@ -27,6 +27,8 @@ const bcrypt = require('bcrypt');
         id:user._id,
         username:user.username,
         email:user.email,
+        roles:user.roles[0]
+
       }
   
       console.log('User created successfully:', user);

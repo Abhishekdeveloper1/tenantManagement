@@ -5,9 +5,9 @@ const {dashboard,packagelist,subscriptionplan,addSubscriptionPlan,subscriptionpl
 const {sessionMiddleware,checkSession,checkAdminRole,checkOwnerRole,checkTenantRole} = require("../middleware/sessionMiddleware");
 
 router.get('/dashboard',checkSession,dashboard);
-router.get('/subscription',checkSession,packagelist);
-router.get('/subscriptionplan',subscriptionplan);
-router.post('/add-subscription-plan',checkAdminRole,addSubscriptionPlan);
+router.get('/subscription-plans',checkOwnerRole,packagelist);
+router.get('/subscriptionplan',checkAdminRole,subscriptionplan);
+router.post('/add-subscription-plan',checkAdminRole,checkAdminRole,addSubscriptionPlan);
 router.get('/subscription-list',checkAdminRole,subscriptionplanlist);
 
 

@@ -38,7 +38,7 @@ const propertyDetails = (req, res) => {
         rentPrice,
         description,
         contactDetails,
-        isAvailabl
+        isAvailable
       } = req.body;
   
       // Handle image uploads (multiple images)
@@ -47,7 +47,8 @@ const propertyDetails = (req, res) => {
   : [];
 
  
-      const userId = req.user ? req.user._id : new mongoose.Types.ObjectId(); // Use authenticated user ID or generate a new ObjectId
+      // const userId = req.user ? req.user._id : new mongoose.Types.ObjectId(); // Use authenticated user ID or generate a new ObjectId
+      const userId = req.session.user.id ? req.session.user.id: new mongoose.Types.ObjectId(); // Use authenticated user ID or generate a new ObjectId
       const subscriptionId = req.body.subscriptionId || new mongoose.Types.ObjectId();
   
       if (!ownerName || !propertyName || !street || !city || !state || !zipCode || !propertyType || !bedrooms || !toilets || !rentPrice) {
@@ -102,7 +103,16 @@ const propertyDetails = (req, res) => {
   };
   
 const propertyLists=async(req,res)=>{
-  const propertylists=await PropertyModel.find({});
+  let propertylists;
+  if(req.session.user.roles==='owner')
+  {
+    propertylists=await PropertyModel.find({userId:req.session.user.id});
+
+ }
+  else{
+    propertylists=await PropertyModel.find({});
+
+ }
 console.log(propertylists);
   res.render('templates/users/propertyLists', {propertylists});
 
