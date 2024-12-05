@@ -18,4 +18,38 @@ const checkSession=(req,res,next)=>{
   }
 }
 
-module.exports={sessionMiddleware,checkSession,};
+const checkAdminRole=(req,res,next)=>{
+if(req.session && req.session.user && req.session.user.roles==='admin')
+{
+  next();
+}
+else
+{
+  res.redirect('/');
+}
+}
+
+const checkOwnerRole=(req,res,next)=>{
+  if(req.session && req.session.user && req.session.user.roles==='owner')
+  {
+    next();
+  }
+  else
+  {
+    res.redirect('/');
+  }
+  }
+  
+  const checkTenantRole=(req,res,next)=>{
+    if(req.session && req.session.user && req.session.user.roles==='owner')
+    {
+      next();
+    }
+    else
+    {
+      res.redirect('/');
+    }
+    }
+
+
+module.exports={sessionMiddleware,checkSession,checkAdminRole,checkOwnerRole,checkTenantRole,};
