@@ -43,4 +43,24 @@ const uplodMiddleware=multer({
       }
     }
   });
+
+  const uplodMiddleware_2 = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        const fileTypes = /jpeg|jpg|png|gif|pdf/;
+        const mimeType = fileTypes.test(file.mimetype);
+        const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+
+        if (mimeType && extname) {
+            return cb(null, true);  // Accept file
+        } else {
+            cb(new Error('Only image and PDF files are allowed'), false);  // Reject file
+        }
+    },
+    limits: { fileSize: 5 * 1024 * 1024 } // 5MB file size limit
+}).fields([
+    { name: 'idProof', maxCount: 1 },
+    { name: 'addressProof', maxCount: 1 }
+]);
+
 module.exports={uplodMiddleware,}

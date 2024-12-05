@@ -38,7 +38,7 @@ const propertyDetails = (req, res) => {
         rentPrice,
         description,
         contactDetails,
-        isAvailable
+        isAvailabl
       } = req.body;
   
       // Handle image uploads (multiple images)

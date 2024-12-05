@@ -1,0 +1,184 @@
+{{>headeradmin}}
+
+<div id="app"></div>
+
+{{>navbar}}
+
+
+<section class="is-title-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <ul>
+      <li>Admin</li>
+      <li>Dashboard</li>
+    </ul>
+    <a href="https://justboil.me/" onclick="alert('Coming soon'); return false" target="_blank" class="button blue">
+      <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
+      <span>Premium Demo</span>
+    </a>
+  </div>
+</section>
+
+<section class="is-hero-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <h1 class="title">
+    Select subscription
+    </h1>
+    <button class="button light">Button</button>
+  </div>
+</section>
+<section class="section main-section">
+  <div class="card mb-6">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-ballot"></i></span>
+        Property Details Form
+      </p>
+    </header>
+<div class="card-content">
+  <form method="post" action="/save-tenant-details" enctype="multipart/form-data">
+    <!-- Personal Information -->
+    <h2 class="title">Tenant Application Form</h2>
+    <div class="field">
+      <label class="label">Full Name</label>
+      <div class="control">
+        <input class="input" type="text" name="fullName" placeholder="Enter your full name" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Date of Birth</label>
+      <div class="control">
+        <input class="input" type="date" name="dateOfBirth" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Gender</label>
+      <div class="control">
+        <div class="select">
+          <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="field">
+      <label class="label">Phone Number</label>
+      <div class="control">
+        <input class="input" type="tel" name="contactDetails[phone]" placeholder="Enter phone number" required pattern="^\d{10}$">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Email Address</label>
+      <div class="control">
+        <input class="input" type="email" name="contactDetails[email]" placeholder="Enter email address" required>
+      </div>
+    </div>
+
+    <!-- Address Information -->
+    <h3 class="subtitle">Address Details</h3>
+    <div class="field">
+      <label class="label">Current Address</label>
+      <div class="control">
+        <input class="input" type="text" name="currentAddress[street]" placeholder="Street" required>
+      </div>
+      <div class="control">
+        <input class="input" type="text" name="currentAddress[city]" placeholder="City" required>
+      </div>
+      <div class="control">
+        <input class="input" type="text" name="currentAddress[state]" placeholder="State" required>
+      </div>
+      <div class="control">
+        <input class="input" type="text" name="currentAddress[zipCode]" placeholder="Zip Code" required>
+      </div>
+      <div class="control">
+        <input class="input" type="text" name="currentAddress[country]" value="India" readonly>
+      </div>
+    </div>
+
+    <!-- Tenancy Preferences -->
+    <h3 class="subtitle">Tenancy Preferences</h3>
+    <div class="field">
+      <label class="label">Preferred Lease Start Date</label>
+      <div class="control">
+        <input class="input" type="date" name="preferredLeaseStartDate" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Preferred Lease Duration (Months)</label>
+      <div class="control">
+        <input class="input" type="number" name="leaseDuration" placeholder="E.g., 12" required min="1">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Budget (₹/Month)</label>
+      <div class="control">
+        <input class="input" type="number" name="budget" placeholder="Enter your monthly rent budget" required>
+      </div>
+    </div>
+
+    <!-- Emergency Contact Information -->
+    <h3 class="subtitle">Emergency Contact</h3>
+    <div class="field">
+      <label class="label">Emergency Contact Name</label>
+      <div class="control">
+        <input class="input" type="text" name="emergencyContact[name]" placeholder="Enter name" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Relationship</label>
+      <div class="control">
+        <input class="input" type="text" name="emergencyContact[relationship]" placeholder="E.g., Parent, Sibling" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Emergency Contact Phone</label>
+      <div class="control">
+        <input class="input" type="tel" name="emergencyContact[phone]" placeholder="Enter phone number" required pattern="^\d{10}$">
+      </div>
+    </div>
+
+    <!-- Upload Documents -->
+    <h3 class="subtitle">Upload Supporting Documents</h3>
+    <div class="field">
+      <label class="label">Upload ID Proof</label>
+      <div class="control">
+        <input class="input" type="file" name="idProof" accept="image/*,.pdf" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Upload Address Proof</label>
+      <div class="control">
+        <input class="input" type="file" name="addressProof" accept="image/*,.pdf" required>
+      </div>
+    </div>
+
+    <!-- Submit and Reset Buttons -->
+    <hr>
+    <div class="field grouped">
+      <div class="control">
+        <button type="submit" class="button green">Submit Application</button>
+      </div>
+      <div class="control">
+        <button type="reset" class="button red">Reset</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+  </div>
+</section>
+
+
+{{>adminfooter}}
