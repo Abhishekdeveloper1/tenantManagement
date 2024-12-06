@@ -6,11 +6,15 @@ const bcrypt = require('bcrypt');
   
     try {
       if (!username || !email || !password || !roles) {
-        return res.status(400).json({ error: 'All fields are required' });
+        // return res.status(400).json({ error: 'All fields are required' });
+        req.flash('error', 'All fields are required');
+        return res.redirect('/register');
       }
         const existingUser = await User.findOne({ email });
       if (existingUser) {
-        return res.status(400).json({ error: 'Email already in use' });
+        // return res.status(400).json({ error: 'Email already in use' });
+        req.flash('error', 'Email already in use');
+        return res.redirect('/register');
       }
         const hashedPassword = await bcrypt.hash(password, 10);
   
@@ -38,7 +42,9 @@ const bcrypt = require('bcrypt');
   
     } catch (error) {
       console.error('Error creating user:', error.message);
-      return res.status(500).json({ error: 'Internal server error' });
+      // return res.status(500).json({ error: 'Internal server error' });
+      req.flash('error', 'Internal server error');
+        return res.redirect('/register');
     }
   };
   
@@ -103,16 +109,20 @@ catch (error) {
   
     try {
       if (!email || !password) {
-        return res.status(400).json({ error: 'Email and password are required' });
+        req.flash('error', 'Email and password are required');
+        return res.redirect('/');
       }
       const user = await User.findOne({ email });
       console.log(user);
       if (!user) {
-        return res.status(401).json({ error: 'Invalid email or password' });
+        req.flash('error', 'Invalid email or password');
+        return res.redirect('/');
       }
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
-        return res.status(401).json({ error: 'Invalid email or password' });
+        req.flash('error', 'Invalid email or password');
+        return res.redirect('/');
+    
       }
         req.session.user = {
         id: user._id,
@@ -126,7 +136,9 @@ catch (error) {
       return res.redirect('/dashboard');
     } catch (error) {
       console.error('Error during login:', error.message);
-      return res.status(500).json({ error: 'Internal server error' });
+      req.flash('error', 'Internal server error');
+      return res.redirect('/');  
+
     }
   };
 

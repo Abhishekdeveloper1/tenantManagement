@@ -7,19 +7,27 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const {sessionMiddleware,checkSession} = require("./middleware/sessionMiddleware");
+const { flushmessage } =require('./middleware/flashmessageMiddleware');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
 const propertyRouter=require('./routes/property');
 const tenantRouter=require('./routes/tenant');
+const flash = require('connect-flash');
 
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-
 app.set('view engine', 'hbs');
 app.use(sessionMiddleware);
+// app.use(flushmessage);
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.successMessage = req.flash('success');
+  res.locals.errorMessage = req.flash('error');
+  next();
+});
 app.use((req, res, next) => {
   console.log('Current session:', req.session);
   next();
