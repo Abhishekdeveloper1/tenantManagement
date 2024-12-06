@@ -41,7 +41,7 @@ const checkOwnerRole=(req,res,next)=>{
   }
   
   const checkTenantRole=(req,res,next)=>{
-    if(req.session && req.session.user && req.session.user.roles==='owner')
+    if(req.session && req.session.user && req.session.user.roles==='user')
     {
       next();
     }

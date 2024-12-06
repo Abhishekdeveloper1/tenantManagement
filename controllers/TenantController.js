@@ -83,13 +83,13 @@ const tenantList=async(req,res)=>{
     // return;
     let tenanatList;
 
-    if(req.session && req.session.user && req.session.user.roles==='admin')
+    if(req.session && req.session.user && req.session.user.roles==='user')
     {
-        tenanatList=await TenantModel.find({});
+        tenanatList=await TenantModel.find({userId:req.session.user.id});
+
     }
     else
     {
-        //  tenanatList=await TenantModel.find({userId:req.session.user.id});
         tenanatList=await TenantModel.find({});
 
 
