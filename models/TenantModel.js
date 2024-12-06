@@ -173,7 +173,11 @@ const TenantSchema = new mongoose.Schema(
         match: [/^\d{10}$/, 'Phone number must be 10 digits'],
       },
     },
-
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     // Uploaded Documents
     // idProof: {
     //   type: String, // File path or URL for uploaded ID proof

@@ -1,0 +1,196 @@
+{{>headeradmin}}
+
+<div id="app"></div>
+
+{{>navbar}}
+
+
+{{!-- <section class="is-title-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <ul>
+      <li>Admin</li>
+      <li>Dashboard</li>
+    </ul>
+    <a href="https://justboil.me/" onclick="alert('Coming soon'); return false" target="_blank" class="button blue">
+      <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
+      <span>Premium Demo</span>
+    </a>
+  </div>
+</section> --}}
+
+<section class="is-hero-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <h1 class="title">
+    Edit tenantlists Details
+    </h1>
+    <button class="button light">Button</button>
+  </div>
+</section>
+<section class="section main-section">
+  <div class="card mb-6">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-ballot"></i></span>
+      Edit tenantlists Details Form
+      </p>
+    </header>
+<div class="card-content">
+<form method="post" action="/update-tenant-details" enctype="multipart/form-data">
+  <!-- Personal Information -->
+           <input type="hidden" name="pid" value="{{ tenantlists._id }}">
+  <div class="field">
+    <label class="label">Full Name</label>
+    <div class="control">
+      <input class="input" type="text" name="fullName" value="{{tenantlists.fullName}}" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Date of Birth</label>
+    <div class="control">
+      <input class="input" type="date" name="dateOfBirth" value="{{formated_dateOfBirth}}" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Gender</label>
+    <div class="control">
+      <div class="select">
+        <select name="gender" required>
+          <option value="Male" {{#if (eq tenantlists.gender 'Male')}}selected{{/if}}>Male</option>
+          <option value="Female" {{#if (eq tenantlists.gender 'Female')}}selected{{/if}}>Female</option>
+          <option value="Other" {{#if (eq tenantlists.gender 'Other')}}selected{{/if}}>Other</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Information -->
+  <div class="field">
+    <label class="label">Phone Number</label>
+    <div class="control">
+      <input class="input" type="tel" name="contactDetails[phone]" value="{{tenantlists.contactDetails.phone}}" required pattern="^\d{10}$">
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Email Address</label>
+    <div class="control">
+      <input class="input" type="email" name="contactDetails[email]" value="{{tenantlists.contactDetails.email}}" required>
+    </div>
+  </div>
+
+  <!-- Address Information -->
+  <div class="field">
+    <label class="label">Street</label>
+    <div class="control">
+      <input class="input" type="text" name="currentAddress[street]" value="{{tenantlists.currentAddress.street}}" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">City</label>
+    <div class="control">
+      <input class="input" type="text" name="currentAddress[city]" value="{{tenantlists.currentAddress.city}}" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">State</label>
+    <div class="control">
+      <input class="input" type="text" name="currentAddress[state]" value="{{tenantlists.currentAddress.state}}" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Zip Code</label>
+    <div class="control">
+      <input class="input" type="text" name="currentAddress[zipCode]" value="{{tenantlists.currentAddress.zipCode}}" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Country</label>
+    <div class="control">
+      <input class="input" type="text" name="currentAddress[country]" value="{{tenantlists.currentAddress.country}}" readonly>
+    </div>
+  </div>
+
+  <!-- Tenancy Preferences -->
+  <div class="field">
+    <label class="label">Preferred Lease Start Date</label>
+    <div class="control">
+      <input class="input" type="date" name="preferredLeaseStartDate" value="{{formated_preferredLeaseStartDate}}" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Preferred Lease Duration (Months)</label>
+    <div class="control">
+      <input class="input" type="number" name="leaseDuration" value="{{tenantlists.leaseDuration}}" required min="1">
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Budget (₹/Month)</label>
+    <div class="control">
+      <input class="input" type="number" name="budget" value="{{tenantlists.budget}}" required>
+    </div>
+  </div>
+
+  <!-- Emergency Contact -->
+  <div class="field">
+    <label class="label">Emergency Contact Name</label>
+    <div class="control">
+      <input class="input" type="text" name="emergencyContact[name]" value="{{tenantlists.emergencyContact.name}}" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Relationship</label>
+    <div class="control">
+      <input class="input" type="text" name="emergencyContact[relationship]" value="{{tenantlists.emergencyContact.relationship}}" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Emergency Contact Phone</label>
+    <div class="control">
+      <input class="input" type="tel" name="emergencyContact[phone]" value="{{tenantlists.emergencyContact.phone}}" required pattern="^\d{10}$">
+    </div>
+  </div>
+
+  <!-- File Upload -->
+  <div class="field">
+    <label class="label">ID Proof</label>
+    <div class="control">
+      <input class="input" type="file" name="idProof">
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Address Proof</label>
+    <div class="control">
+      <input class="input" type="file" name="addressProof">
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <div class="field grouped">
+    <div class="control">
+      <button type="submit" class="button green">Update tenantlists</button>
+    </div>
+    <div class="control">
+      <a href="/dashboard" class="button red">Cancel</a>
+    </div>
+  </div>
+</form>
+
+</div>
+
+
+  </div>
+</section>
+
+
+{{>adminfooter}}

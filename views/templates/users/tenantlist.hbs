@@ -1,0 +1,162 @@
+{{>headeradmin}}
+
+<div id="app"></div>
+
+{{>navbar}}
+
+<style>
+    .container {
+  {{!-- max-width: 100px; --}}
+  overflow: scroll;
+}
+footer {
+  padding: 200px;
+}
+</style>
+
+{{!-- <section class="is-title-bar">
+  <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+    <ul>
+      <li>Admin</li>
+      <li>Dashboard</li>
+    </ul>
+    <a href="https://justboil.me/" onclick="alert('Coming soon'); return false" target="_blank" class="button blue">
+      <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
+      <span>Premium Demo</span>
+    </a>
+  </div>
+</section> --}}
+
+
+<section class="section main-section"></section>
+    <div class="notification blue">
+      <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
+        <div>
+          <span class="icon"><i class="mdi mdi-buffer"></i></span>
+          <b>Tenant List</b>
+        </div>
+        {{!-- <button type="button" class="button small textual --jb-notification-dismiss">Dismiss</button> --}}
+          <a href="/add-tenant-details" class="button small textual --jb-notification-dismiss">Add Tenant Details</a>
+
+      </div>
+    </div>
+    <div class="card has-table container">
+      <header class="card-header">
+        <p class="card-header-title">
+          <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+          Clients
+        </p>
+        <a href="#" class="card-header-icon">
+          <span class="icon"><i class="mdi mdi-reload"></i></span>
+        </a>
+      </header>
+      <div class="card-content">
+        <table>
+          <thead>
+          <tr>
+  {{!-- <th class="checkbox-cell">
+    <label class="checkbox">
+      <input type="checkbox">
+      <span class="check"></span>
+    </label>
+  </th> --}}
+  <th>S.no.</th>
+  <th>Full Name</th>
+  <th>Date of Birth</th>
+  <th>Gender</th>
+  <th>Phone Number</th>
+  <th>Email Address</th>
+  <th>Current Address</th>
+  <th>Preferred Lease Start Date</th>
+  <th>Preferred Lease Duration (Months)</th>
+  <th>Budget (₹/Month)</th>
+  <th>Emergency Contact</th>
+ 
+  <th>Images(ID proof)</th>
+      <th>Images(Upload Address Proof)</th>
+
+  <th>Action</th>
+</tr>
+</thead>
+<tbody>
+  {{#each tenanatList}}
+  <tr>
+    {{!-- <td>
+      <label class="checkbox">
+        <input type="checkbox">
+        <span class="check"></span>
+      </label>
+    </td> --}}
+        <td>{{incrementCounter @index}}</td>  <!-- Use the helper here -->
+
+    <td>{{this.fullName}}</td>
+    <td>{{this.dateOfBirth}}</td>
+        <td>{{this.gender}}</td>
+                <td>{{this.contactDetails.phone}}</td>
+                <td>{{this.contactDetails.email}}</td>
+
+
+<td>
+  {{this.currentAddress.street}}, {{this.currentAddress.city}}, {{this.currentAddress.state}}, 
+  {{this.currentAddress.zipCode}}, {{this.currentAddress.country}}
+</td>
+    <td>{{this.preferredLeaseStartDate}}</td>
+        <td>{{this.leaseDuration}}</td>
+
+    <td>{{this.budget}}</td>
+    <td>{{this.emergencyContact.phone}}</td>
+   
+             
+                                   <td>
+      {{#each this.idProof}}
+        <img src="/{{this}}" alt="Property Image" style="width: 50px; height: 50px; object-fit: cover; margin-right: 5px;">
+      {{/each}}
+    </td>
+
+                                   <td>
+      {{#each this.addressProof}}
+        <img src="/{{this}}" alt="Property Image" style="width: 50px; height: 50px; object-fit: cover; margin-right: 5px;">
+      {{/each}}
+    </td>
+
+
+    <td class="actions-cell">
+      <div class="buttons right nowrap">
+        <a href="/edit-tenant-details/{{this._id}}"class="button small green --jb-modal" data-target="sample-modal-2" type="button">
+          <span class="icon"><i class="mdi mdi-eye"></i></span>
+        </a>
+        <button class="button small red --jb-modal" data-target="sample-modal" type="button">
+          <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+        </button>
+      </div>
+    </td>
+  </tr>
+  {{/each}}
+           
+        
+        
+         
+          </tbody>
+        </table>
+        {{!-- <div class="table-pagination">
+          <div class="flex items-center justify-between">
+            <div class="buttons">
+              <button type="button" class="button active">1</button>
+              <button type="button" class="button">2</button>
+              <button type="button" class="button">3</button>
+            </div>
+            <small>Page 1 of 3</small>
+          </div>
+        </div> --}}
+      </div>
+    </div>
+
+  
+  
+
+  
+  </section>
+
+<section class="section main-section"></section>
+
+{{>adminfooter}}

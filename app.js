@@ -37,6 +37,11 @@ hbs.registerHelper('incrementCounter', function(index) {
 hbs.registerHelper('eq', (a, b) => {
   return a === b;
 });
+
+app.use((req, res, next) => {
+  res.locals.session = req.session; // Makes session accessible in templates
+  next();
+});
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/',authRouter);

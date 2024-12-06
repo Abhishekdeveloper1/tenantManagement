@@ -47,7 +47,7 @@
           <div class="user-avatar">
             <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe" class="rounded-full">
           </div>
-          <div class="is-user-name"><span>John Doe</span></div>
+          <div class="is-user-name"><span>{{session.user.username}}</span></div>
           <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
         </a>
         <div class="navbar-dropdown">
@@ -129,12 +129,12 @@
         </a>
       </li>
       <li>
-        <a href="/add-tenant-details">
+        <a href="/tenant-list">
           <span class="icon"><i class="mdi mdi-lock"></i></span>
           <span class="menu-item-label">Tenant Details</span>
         </a>
       </li>
-      <li>
+      {{!-- <li>
         <a class="dropdown">
           <span class="icon"><i class="mdi mdi-view-list"></i></span>
           <span class="menu-item-label">Submenus</span>
@@ -152,10 +152,10 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li> --}}
     </ul>
-    <p class="menu-label">About</p>
-    <ul class="menu-list">
+    {{!-- <p class="menu-label">About</p> --}}
+    {{!-- <ul class="menu-list">
       <li>
         <a href="https://justboil.me" onclick="alert('Coming soon'); return false" target="_blank" class="has-icon">
           <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
@@ -174,6 +174,6 @@
           <span class="menu-item-label">GitHub</span>
         </a>
       </li>
-    </ul>
+    </ul> --}}
   </div>
 </aside>
